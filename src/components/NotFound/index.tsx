@@ -1,3 +1,11 @@
+/**
+ * Portfolio personnel - www.alexislcs.fr
+ * Application développée par Alexis Lucas.
+ *
+ * Copyright © 2020 Alexis Lucas
+ * Email : contact@alexislcs.fr
+ */
+
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {Page, Container, Card, Text, Image} from "wix-style-react";
@@ -9,11 +17,17 @@ interface SampleState {
     error: string;
 }
 
+/**
+ * Classe concernant le composant de l'erreur 404.
+ */
 class NotFound extends React.Component<AppProps, SampleState> {
     constructor(props: AppProps) {
         super(props);
     }
 
+    /**
+     * Contenu de l'entête de page.
+     */
     _renderHeader() {
         return <Page.Header title="404 - Not Found" />;
     }

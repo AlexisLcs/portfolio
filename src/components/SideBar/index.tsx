@@ -1,3 +1,11 @@
+/**
+ * Portfolio personnel - www.alexislcs.fr
+ * Application développée par Alexis Lucas.
+ *
+ * Copyright © 2020 Alexis Lucas
+ * Email : contact@alexislcs.fr
+ */
+
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import * as Icons from "wix-ui-icons-common";
@@ -21,6 +29,9 @@ interface SideBarState {
     redirect: boolean;
 }
 
+/**
+ * Classe concernant la barre de navigation.
+ */
 class SideBar extends React.Component<AppProps, SideBarState> {
     constructor(props: AppProps) {
         super(props);
@@ -30,6 +41,9 @@ class SideBar extends React.Component<AppProps, SideBarState> {
         };
     }
 
+    /**
+     * Gestion des redirections entre les différents composants.
+     */
     redirect = () => {
         switch (this.state.redirectType) {
             case "home":
@@ -47,12 +61,15 @@ class SideBar extends React.Component<AppProps, SideBarState> {
         }
     };
 
+    /**
+     * Contenu du pieds de la barre de navigation contenant le copyright.
+     */
     footer = () => {
         return (
             <div className="footer">
                 <Box direction="vertical" align="center" marginLeft={4}>
                     <Text size="tiny" textAlign="center" secondary>
-                        Copyright © 2020 Alexis Lucas
+                        {this.props.t("sidebar.copyright")}
                     </Text>
                 </Box>
             </div>
@@ -91,13 +108,10 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                         <div className="commonDesignCenter">
                             <Box direction="vertical" align="center" marginTop={2}>
                                 <Text size="medium" weight="bold">
-                                    Alexis Lucas
+                                    {this.props.t("sidebar.name")}
                                 </Text>
                                 <Text size="small" secondary>
-                                    <div className="center">
-                                        Elève-ingénieur en informatique à Polytech et en Maîtrise à
-                                        l&apos;UdeS
-                                    </div>
+                                    <div className="center">{this.props.t("sidebar.current")}</div>
                                 </Text>
                             </Box>
                             <br />
@@ -106,7 +120,7 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                             <span className="into-notif" title="Adresse de contact">
                                 <Notification theme="success" show>
                                     <Notification.TextLabel>
-                                        contact@alexislcs.fr
+                                        {this.props.t("sidebar.email")}
                                     </Notification.TextLabel>
                                 </Notification>
                             </span>
@@ -123,7 +137,7 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                         }}
                         selected={this.props.location.pathname === "/"}
                     >
-                        Accueil
+                        {this.props.t("sidebar.home")}
                     </SidebarSectionItem>
                 </Sidebar.Item>
 
@@ -135,7 +149,7 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                         }}
                         selected={this.props.location.pathname === "/projects"}
                     >
-                        Projets
+                        {this.props.t("sidebar.projects")}
                     </SidebarSectionItem>
                 </Sidebar.Item>
 
@@ -147,7 +161,7 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                             window.open("https://www.linkedin.com/in/lucas-alexis/");
                         }}
                     >
-                        Profil LinkedIn <Icons.ExternalLink size="17" />
+                        {this.props.t("sidebar.linkedIn")} <Icons.ExternalLink size="17" />
                     </SidebarSectionItem>
                 </Sidebar.Item>
 

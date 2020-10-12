@@ -1,3 +1,11 @@
+/**
+ * Portfolio personnel - www.alexislcs.fr
+ * Application développée par Alexis Lucas.
+ *
+ * Copyright © 2020 Alexis Lucas
+ * Email : contact@alexislcs.fr
+ */
+
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import * as Icons from "wix-ui-icons-common";
@@ -19,18 +27,171 @@ export type AppProps = WithTranslation;
 
 interface SampleState {
     error: string;
+    projects: Project[];
 }
 
+export interface Project {
+    title: string;
+    year: string;
+    pedagogy: string;
+    goal: string;
+    img: string;
+    skills: string[];
+    github: string;
+}
+
+/**
+ * Classe concernant le listing des projets.
+ */
 class Projects extends React.Component<AppProps, SampleState> {
     constructor(props: AppProps) {
         super(props);
+        this.state = {
+            error: "",
+            projects: []
+        };
     }
 
+    /**
+     * Contenu de l'entête de page.
+     */
     _renderHeader() {
-        return <Page.Header title="Projets réalisés" />;
+        return <Page.Header title={this.props.t("projects.header")} />;
+    }
+
+    /**
+     * Lecture des données concernant les projets recensés.
+     */
+    _readProjects() {
+        let index = 1;
+        while (
+            this.props.t("projects.project_" + index.toString() + ".title") !=
+            "projects.project_" + index.toString() + ".title"
+        ) {
+            let idSkill = 1;
+            const skills: string[] = [];
+            while (
+                this.props.t(
+                    "projects.project_" + index.toString() + ".skill_" + idSkill.toString()
+                ) !=
+                "projects.project_" + index.toString() + ".skill_" + idSkill.toString()
+            ) {
+                skills.push(
+                    this.props.t(
+                        "projects.project_" + index.toString() + ".skill_" + idSkill.toString()
+                    )
+                );
+                ++idSkill;
+            }
+
+            const project: Project = {
+                title: this.props.t("projects.project_" + index.toString() + ".title"),
+                year: this.props.t("projects.project_" + index.toString() + ".year"),
+                pedagogy: this.props.t("projects.project_" + index.toString() + ".pedagogy"),
+                goal: this.props.t("projects.project_" + index.toString() + ".goal"),
+                img: this.props.t("projects.project_" + index.toString() + ".img"),
+                github: this.props.t("projects.project_" + index.toString() + ".github"),
+                skills: skills
+            };
+
+            this.state.projects.push(project);
+            ++index;
+        }
+
+        this.state.projects.reverse();
+    }
+
+    /**
+     * Méthode permettant de render une compétence comme élément de liste.
+     * @param skill Le nom de la compétence.
+     */
+    _renderSkill(skill: string) {
+        return <li>{skill}</li>;
+    }
+
+    /**
+     * Méthode permettant de render une image si une URL associée existe.
+     * @param url L'url contenue dans les données.
+     */
+    _renderImage(url: string) {
+        if (url != "") {
+            return (
+                <div className="right">
+                    <Image width="50%" src={url} />
+                </div>
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Méthode permettant de render l'accès au projet Git si celui-ci a été indiqué.
+     * @param url L'url contenue dans les données.
+     */
+    _renderGit(url: string) {
+        if (url != "") {
+            return (
+                <div className="center">
+                    <Icons.GitHubSmall /> <a href={url}>{this.props.t("projects.git")} </a>
+                    <Icons.GitHubSmall />
+                </div>
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Méthode permettant de render les informations d'un projet.
+     * @param project Le projet à render.
+     */
+    _renderProject(project: Project) {
+        return (
+            <div>
+                <Row>
+                    <Col span={9}>
+                        <Card>
+                            <Card.Header title={project.title} />
+                            <Card.Content>
+                                <Text size="small" secondary>
+                                    <b>{this.props.t("projects.year")}</b> {project.year}
+                                    <br />
+                                    <b>{this.props.t("projects.pedagogy")}</b> {project.pedagogy}
+                                    <br />
+                                    <br />
+                                    <b>{this.props.t("projects.goal")}</b> {project.goal}
+                                    <br />
+                                    <br />
+                                    {this._renderImage(project.img)}
+                                </Text>
+                            </Card.Content>
+                        </Card>
+                    </Col>
+                    <Col span={3}>
+                        <Card>
+                            <Card.Content>
+                                <Text size="small" secondary>
+                                    <b>{this.props.t("projects.skill")}</b>
+                                    <ul>
+                                        {project.skills.map((skill) => {
+                                            return this._renderSkill(skill);
+                                        })}
+                                    </ul>
+                                    {this._renderGit(project.github)}
+                                </Text>
+                            </Card.Content>
+                        </Card>
+                    </Col>
+                </Row>
+                <Divider skin="light" />
+                <br />
+            </div>
+        );
     }
 
     render() {
+        this._readProjects();
         return (
             <Page>
                 {this._renderHeader()}
@@ -39,386 +200,15 @@ class Projects extends React.Component<AppProps, SampleState> {
                         <Cell>
                             <Notification theme="standard" show>
                                 <Notification.TextLabel>
-                                    Pour en savoir plus sur l&apos;un des projets, n&apos;hésitez
-                                    pas à me contacter !
+                                    {this.props.t("projects.notification")}
                                 </Notification.TextLabel>
                                 <Notification.CloseButton />
                             </Notification>
                         </Cell>
                         <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Portfolio" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2020
-                                            <br />
-                                            <b>Objectif du projet : </b>
-                                            Projet personnel permettant de me présenter à travers
-                                            différents projets.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>React + TypeScript</li>
-                                                <li>DNS</li>
-                                                <li>Apache + Cert. SSL</li>
-                                                <li>Debian 9</li>
-                                            </ul>
-                                            <br />
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/portfolio">
-                                                    Code source du projet
-                                                </a>{" "}
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Prédiction de la bourse" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2020
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet réalisé en groupe
-                                            dans le cadre de l&apos;apprentissage de
-                                            l&apos;optimisation continue à l&apos;école{" "}
-                                            <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet : </b>
-                                            Créer un Perceptron en Python avec une descente de
-                                            gradient pour prédire l&apos;évolution de la bourse
-                                            (croissance ou décroissance).
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>Python</li>
-                                                <li>PyCharm IDE</li>
-                                                <li>Théories sur l&apos;optimisation continue.</li>
-                                            </ul>
-                                            <br />
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/Perceptron">
-                                                    Code source du projet
-                                                </a>{" "}
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Itinéraires touristiques" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2020
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet réalisé en groupe
-                                            dans le cadre de l&apos;apprentissage de
-                                            l&apos;optimisation discrète à l&apos;école{" "}
-                                            <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet: </b>A partir d&apos;un modèle
-                                            proposé par l&apos;encadrant (Y. Kergosien),
-                                            l&apos;objectif était de trouver le meilleur itinéraire
-                                            touristique possible, ceci en prenant en compte une
-                                            multitude de contraintes. Pour ce projet, nous avons
-                                            tenté une métaheuristique de type parcours.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>C/C++</li>
-                                                <li>
-                                                    Théorie sur les problèmes d&apos;optimisations
-                                                    discrètes.
-                                                </li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/OptimDiscrete">
-                                                    Code source du projet
-                                                </a>
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Jeu vidéo - UnPiouMario" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2020
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet réalisé en groupe
-                                            dans le cadre de l&apos;apprentissage du langage QT à
-                                            l&apos;école <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet: </b>
-                                            Réaliser un jeu vidéo sur le thème de Mario en concevant
-                                            le game design, les graphismes, le moteur graphique,
-                                            etc. Nous avions choisi de faire un jeu UnFair, à savoir
-                                            un jeu de plate-forme qui regroupe une multitude de
-                                            pièges.
-                                            <br />
-                                            <br />
-                                            <div className="right">
-                                                <Image
-                                                    width="50%"
-                                                    src="https://cloud.alexislcs.fr/portfolio/images/waEflUc.gif"
-                                                />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>C/C++</li>
-                                                <li>Qt Creator</li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/UnPiouMario">
-                                                    Code source du projet
-                                                </a>
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Logiciel de gestion de fournitures" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2020
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet réalisé en groupe
-                                            dans le cadre de l&apos;apprentissage du langage C# à
-                                            l&apos;école <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet: </b>
-                                            Réaliser un logiciel en C# en suivant le cahier des
-                                            charges d&apos;un client pour la gestion de ses
-                                            fournitures.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>C#</li>
-                                                <li>SQLite</li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/Bacchus">
-                                                    Code source du projet
-                                                </a>
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Logiciel de gestion de vidéos" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2019
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet tutoré réalisé en
-                                            groupe dans le cadre de l&apos;apprentissage des liens
-                                            orientés objets avec les bases de données à l&apos;école{" "}
-                                            <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet : </b>
-                                            Réaliser un logiciel permettant de gérer une base de
-                                            données de vidéos avec des encodeurs, des formats et des
-                                            lecteurs. Le but était de réaliser cette application en
-                                            utilisant Hibernate.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>Java</li>
-                                                <li>Hibernate</li>
-                                                <li>MySQL</li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/ProjetHibernate">
-                                                    Code source du projet
-                                                </a>{" "}
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Pointeuse pour les entreprises" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2019
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet tutoré réalisé en
-                                            groupe dans le cadre de l&apos;apprentissage du langage
-                                            Java à l&apos;école <i>Polytech de Tours</i>.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet : </b>
-                                            Réaliser un logiciel de gestion d&apos;une entreprise,
-                                            comprenant une gestion d&apos;équipe et un système de
-                                            pointage. Le pointage a été simulé à l&apos;aide
-                                            d&apos;une pointeuse virtuelle réalisée en Java
-                                            également.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>Java et Swing</li>
-                                                <li>Sérialisation de données</li>
-                                                <li>Liaisons TCP</li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/TimeClockManager">
-                                                    Code source du projet
-                                                </a>{" "}
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Divider skin="standard" />
-                        <br />
-                        <Row>
-                            <Col span={9}>
-                                <Card>
-                                    <Card.Header title="Le compte est bon !" />
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Année de réalisation :</b> 2016
-                                            <br />
-                                            <b>Context pédagogique : </b>Projet réalisé en groupe
-                                            dans le cadre du baccalauréat au lycée. Il s&apos;agit
-                                            de mon premier projet en informatique réalisé, à
-                                            l&apos;époque, avec un bagage minimum en JavaScript. Ce
-                                            dernier m&apos;a évidemment donné envie de continuer
-                                            dans ce domaine.
-                                            <br />
-                                            <br />
-                                            <b>Objectif du projet : </b>
-                                            Réaliser le jeu du compte est bon.
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                            <Col span={3}>
-                                <Card>
-                                    <Card.Content>
-                                        <Text size="small" secondary>
-                                            <b>Compétences et outils :</b>
-                                            <ul>
-                                                <li>JavaScript</li>
-                                                <li>Canvas</li>
-                                            </ul>
-                                            <div className="center">
-                                                <Icons.GitHubSmall />{" "}
-                                                <a href="https://github.com/AlexisLcs/LCEB">
-                                                    Code source du projet
-                                                </a>
-                                                <Icons.GitHubSmall />
-                                            </div>
-                                        </Text>
-                                    </Card.Content>
-                                </Card>
-                            </Col>
-                        </Row>
+                        {this.state.projects.map((project) => {
+                            return this._renderProject(project);
+                        })}
                     </Container>
                 </Page.Content>
             </Page>
