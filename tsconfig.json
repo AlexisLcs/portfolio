@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+      "sourceMap": true,
+      "noImplicitAny": false,
+      "module": "commonjs",
+      "target": "es5",
+      "lib": [
+        "esnext",
+        "dom",
+        "dom.iterable"
+      ],
+      "removeComments": true,
+      "allowSyntheticDefaultImports": true,
+      "jsx": "react",
+      "allowJs": true,
+      "baseUrl": "./",
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+      "downlevelIteration": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "paths": {
+        "components/*": [
+          "src/components/*"
+        ],
+        "assets/*": [
+          "src/assets/*"
+        ],
+        "@/*": [
+          "src/*"
+        ]
+      }
+    },
+    "include": [
+      "./src"
+    ],
+    "exclude": [
+      "./src/assets/"
+    ]
+  }
