@@ -84,11 +84,9 @@ class Home extends React.Component<AppProps, SampleState> {
                                 </Card>
                             </Col>
                             <Col span={4}>
-                                <Page.Sticky>
-                                    <Card>
-                                        <Image src="https://cloud.alexislcs.fr/portfolio/images/picture.jpg" />
-                                    </Card>
-                                </Page.Sticky>
+                                <Card>
+                                    <Image src="https://cloud.alexislcs.fr/portfolio/images/picture.jpg" />
+                                </Card>
                             </Col>
                         </Row>
                     </Container>

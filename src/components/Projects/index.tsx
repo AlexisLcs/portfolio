@@ -13,6 +13,7 @@ import {
     Notification,
     Divider
 } from "wix-style-react";
+import "assets/styles/projects.scss";
 
 export type AppProps = WithTranslation;
 

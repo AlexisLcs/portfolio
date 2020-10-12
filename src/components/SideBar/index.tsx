@@ -1,8 +1,18 @@
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import * as Icons from "wix-ui-icons-common";
-import {Sidebar, SidebarDivider, SidebarSectionItem, Box, Avatar, Text} from "wix-style-react";
+import {
+    Sidebar,
+    SidebarDivider,
+    SidebarSectionItem,
+    Box,
+    Avatar,
+    Text,
+    Notification,
+    Cell
+} from "wix-style-react";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import "assets/styles/sidebar.scss";
 
 export type AppProps = WithTranslation & RouteComponentProps;
 
@@ -39,13 +49,13 @@ class SideBar extends React.Component<AppProps, SideBarState> {
 
     footer = () => {
         return (
-            <p className="footer">
+            <div className="footer">
                 <Box direction="vertical" align="center" marginLeft={4}>
                     <Text size="tiny" textAlign="center" secondary>
                         Copyright © 2020 Alexis Lucas
                     </Text>
                 </Box>
-            </p>
+            </div>
         );
     };
 
@@ -83,25 +93,24 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                                 <Text size="medium" weight="bold">
                                     Alexis Lucas
                                 </Text>
-                                <Text textAlign="center" size="small" secondary>
-                                    Elève-ingénieur en informatique à Polytech et en Maîtrise à
-                                    l&apos;UdeS
+                                <Text size="small" secondary>
+                                    <div className="center">
+                                        Elève-ingénieur en informatique à Polytech et en Maîtrise à
+                                        l&apos;UdeS
+                                    </div>
                                 </Text>
                             </Box>
                             <br />
                         </div>
-                        {/* <Cell>
-                            <span
-                                className="into-notif"
-                                title="Je cherche actuellement mon stage de fin d'étude pour une durée de 18 semaines minimum à partir d'Avril 2021."
-                            >
+                        <Cell>
+                            <span className="into-notif" title="Adresse de contact">
                                 <Notification theme="success" show>
                                     <Notification.TextLabel>
-                                        En recherche de stage
+                                        contact@alexislcs.fr
                                     </Notification.TextLabel>
                                 </Notification>
                             </span>
-                        </Cell> */}
+                        </Cell>
                         <SidebarDivider fullWidth />
                     </Box>
                 </Sidebar.PersistentHeader>

@@ -1,6 +1,7 @@
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {Page, Container, Card, Text, Image} from "wix-style-react";
+import "assets/styles/notfound.scss";
 
 export type AppProps = WithTranslation;
 
