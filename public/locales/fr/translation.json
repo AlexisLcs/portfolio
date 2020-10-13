@@ -7,7 +7,8 @@
         "course": "Mon parcours",
         "presentation": "Depuis mon plus jeune âge, une passion s’est ancrée dans ma vie : l’informatique. Plusieurs personnes m’ont dit que cette passion pouvait découler du monde des jeux vidéos, mais en réalité, lorsque nous étudions ce domaine, nous pouvons découvrir qu’il s’agit en réalité d’un univers bien vaste. C’est donc par cette vision que j’ai construit mon parcours pour devenir ingénieur en informatique, et plus particulièrement dans le développement logiciel. \n\nDurant mon parcours, avant l’école d’ingénieur, j’ai eu le privilège de réaliser de petits travaux, comme des projets informatiques au collège jusqu’à la réalisation d’un TIPE autour de la voiture autonome, en classe préparatoire. \n\nL’ensemble de ces projets m’ont permis de mieux comprendre l’intérêt que je porte à l’informatique et ma persévérance me permettra continuellement d’évoluer. \n\nC’est ainsi que j’ai joint l’École Polytechnique Universitaire où j’ai pu créer de nouvelles compétences, notamment en développement logiciel, en gestion de projet ou encore en intelligence artificielle. J'ai également poursuivi ma formation à l'Université de Sherbrooke en me spécialisant dans cette voie. \n\nFinalement, j'ai profité de cette période pour m’investir dans différentes associations dont le Bureau des Arts de l’école ou encore Ingénieur Sans Frontière.",
         "accountActivity": "Activités du compte",
-        "email": "Adresse e-mail"
+        "email": "Adresse e-mail",
+        "star": "* Cursus double diplôme avec l'Université de Sherbrooke au Canada."
     },
     "sidebar": {
         "name": "Alexis Lucas",
@@ -20,57 +21,47 @@
     },
     "projects": {
         "header": "Projets réalisés",
-        "notification": "Pour en savoir plus sur l'un des projets, n'hésitez pas à me contacter !",
+        "info": "Retrouvez quelques uns de mes projets dans la liste ci-dessous. Les informations de ceux-ci, ainsi que les accès aux codes sources, sont disponibles dans les différents onglets.",
         "year": "Année de réalisation :",
         "pedagogy": "Context pédagogique :",
         "goal": "Objectif du projet :",
         "skill": "Compétences et outils :",
-        "git": "Code source du projet",
+        "git": "Code source",
 
         "project_1": {
-            "title": "Le compte est bon !",
-            "year": "2016",
-            "pedagogy": "Projet réalisé en groupe dans le cadre du baccalauréat au lycée. Il s'agit de mon premier projet en informatique réalisé, à l'époque, avec un bagage minimum en JavaScript. Ce dernier m'a évidemment donné envie de continuer dans ce domaine.",
-            "goal": "Réaliser le jeu du compte est bon.",
-            "img": "",
-            "skill_1": "JavaScript",
-            "skill_2": "Canvas",
-            "github": "https://github.com/AlexisLcs/LCEB"
-        },
-        "project_2": {
-            "title": "Pointeuse pour les entreprises",
+            "title": "Pointeuse pour les entreprises (Java)",
             "year": "2019",
             "pedagogy": "Projet tutoré réalisé en groupe dans le cadre de l'apprentissage du langage Java à l'école Polytech de Tours.",
             "goal": "Réaliser un logiciel de gestion d'une entreprise, comprenant une gestion d'équipe et un système de pointage. Le pointage a été simulé à l'aide d'une pointeuse virtuelle réalisée en Java également.",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/timeclock.png",
             "skill_1": "Java et Swing",
             "skill_2": "Sérialisation de données",
             "skill_3": "Liaisons TCP",
             "github": "https://github.com/AlexisLcs/TimeClockManager"
         },
-        "project_3": {
-            "title": "Logiciel de gestion de vidéos",
+        "project_2": {
+            "title": "Logiciel de gestion de vidéos (Java)",
             "year": "2019",
             "pedagogy": "Projet tutoré réalisé en groupe dans le cadre de l'apprentissage des liens orientés objets avec les bases de données à l'école Polytech de Tours.",
             "goal": "Réaliser un logiciel permettant de gérer une base de données de vidéos avec des encodeurs, des formats et des lecteurs. Le but était de réaliser cette application en utilisant Hibernate.",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/kodek.png",
             "skill_1": "Java",
             "skill_2": "Hibernate",
             "skill_3": "MySQL",
             "github": "https://github.com/AlexisLcs/ProjetHibernate"
         },
-        "project_4": {
-            "title": "Logiciel de gestion de fournitures",
+        "project_3": {
+            "title": "Logiciel de gestion de fournitures (C#)",
             "year": "2020",
             "pedagogy": "Projet réalisé en groupe dans le cadre de l'apprentissage du langage C# à l'école Polytech de Tours.",
             "goal": "Réaliser un logiciel en C# en suivant le cahier des charges d'un client pour la gestion de ses fournitures.",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/fournitures.png",
             "skill_1": "C#",
             "skill_2": "SQLite",
             "github": "https://github.com/AlexisLcs/Bacchus"
         },
-        "project_5": {
-            "title": "Jeu vidéo - UnPiouMario",
+        "project_4": {
+            "title": "Jeu vidéo - UnPiouMario (Qt Creator)",
             "year": "2020",
             "pedagogy": "Projet réalisé en groupe dans le cadre de l'apprentissage du langage QT à l'école Polytech de Tours.",
             "goal": "Réaliser un jeu vidéo sur le thème de Mario en concevant le game design, les graphismes, le moteur graphique, etc. Nous avions choisi de faire un jeu UnFair, à savoir un jeu de plate-forme qui regroupe une multitude de pièges.",
@@ -79,38 +70,44 @@
             "skill_2": "Qt Creator",
             "github": "https://github.com/AlexisLcs/UnPiouMario"
         },
-        "project_6": {
-            "title": "Itinéraires touristiques",
+        "project_5": {
+            "title": "Itinéraires touristiques (C/C++)",
             "year": "2020",
             "pedagogy": "Projet réalisé en groupe dans le cadre de l'apprentissage de l'optimisation discrète à l'école Polytech de Tours.",
             "goal": "A partir d'un modèle proposé par l'encadrant (Y. Kergosien), l'objectif était de trouver le meilleur itinéraire touristique possible, ceci en prenant en compte une multitude de contraintes. Pour ce projet, nous avons tenté une métaheuristique de type parcours.",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/touristique.png",
             "skill_1": "C/C++",
             "skill_2": "Théorie sur les problèmes d'optimisations discrètes.",
             "github": "https://github.com/AlexisLcs/OptimDiscrete"
         },
-        "project_7": {
-            "title": "Prédiction de la bourse",
+        "project_6": {
+            "title": "Prédiction de la bourse (Python)",
             "year": "2020",
             "pedagogy": "Projet réalisé en groupe dans le cadre de l'apprentissage de l'optimisation continue à l'école Polytech de Tours.",
             "goal": "Créer un Perceptron en Python avec une descente de gradient pour prédire l'évolution de la bourse (croissance ou décroissance).",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/bourse.png",
             "skill_1": "Python",
             "skill_2": "PyCharm IDE",
             "skill_3": "Théories sur l'optimisation continue.",
             "github": "https://github.com/AlexisLcs/Perceptron"
         },
-        "project_8": {
-            "title": "Portfolio",
+        "project_7": {
+            "title": "Portfolio (React + TypeScript)",
             "year": "2020",
             "pedagogy": "Aucun",
             "goal": "Projet personnel permettant de me présenter à travers différents projets.",
-            "img": "",
+            "img": "https://cloud.alexislcs.fr/portfolio/images/React-Typescript.png",
             "skill_1": "React + TypeScript",
             "skill_2": "DNS",
             "skill_3": "Apache + Cert. SSL",
             "skill_4": "Debian 9",
             "github": "https://github.com/AlexisLcs/portfolio"
         }
+    },
+    "notfound": {
+        "notfound": "La page souhaitée est introuvable.",
+        "dntworry": "Vous êtes perdus ? Ne soyez pas triste, ici il y a des cookies ! Détentez-vous et réessayez plus tard...",
+        "mention": "Illustration de",
+        "author": "Pusheen sur giphy"
     }
 }

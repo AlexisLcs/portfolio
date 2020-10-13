@@ -9,18 +9,7 @@
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
 import * as Icons from "wix-ui-icons-common";
-import {
-    Page,
-    Container,
-    Row,
-    Col,
-    Card,
-    Text,
-    Image,
-    Cell,
-    Notification,
-    Divider
-} from "wix-style-react";
+import {Page, Container, Row, Col, Card, Text, Image, Accordion, Button} from "wix-style-react";
 import "assets/styles/projects.scss";
 
 export type AppProps = WithTranslation;
@@ -50,13 +39,6 @@ class Projects extends React.Component<AppProps, SampleState> {
             error: "",
             projects: []
         };
-    }
-
-    /**
-     * Contenu de l'entête de page.
-     */
-    _renderHeader() {
-        return <Page.Header title={this.props.t("projects.header")} />;
     }
 
     /**
@@ -102,6 +84,13 @@ class Projects extends React.Component<AppProps, SampleState> {
     }
 
     /**
+     * Contenu de l'entête de page.
+     */
+    _renderHeader() {
+        return <Page.Header title={this.props.t("projects.header")} />;
+    }
+
+    /**
      * Méthode permettant de render une compétence comme élément de liste.
      * @param skill Le nom de la compétence.
      */
@@ -133,8 +122,15 @@ class Projects extends React.Component<AppProps, SampleState> {
         if (url != "") {
             return (
                 <div className="center">
-                    <Icons.GitHubSmall /> <a href={url}>{this.props.t("projects.git")} </a>
-                    <Icons.GitHubSmall />
+                    <Button
+                        as="a"
+                        href={url}
+                        skin="dark"
+                        priority="secondary"
+                        prefixIcon={<Icons.GitHubSmall />}
+                    >
+                        {this.props.t("projects.git")}
+                    </Button>
                 </div>
             );
         }
@@ -149,42 +145,55 @@ class Projects extends React.Component<AppProps, SampleState> {
     _renderProject(project: Project) {
         return (
             <div>
-                <Row>
-                    <Col span={9}>
-                        <Card>
-                            <Card.Header title={project.title} />
-                            <Card.Content>
-                                <Text size="small" secondary>
-                                    <b>{this.props.t("projects.year")}</b> {project.year}
-                                    <br />
-                                    <b>{this.props.t("projects.pedagogy")}</b> {project.pedagogy}
-                                    <br />
-                                    <br />
-                                    <b>{this.props.t("projects.goal")}</b> {project.goal}
-                                    <br />
-                                    <br />
-                                    {this._renderImage(project.img)}
-                                </Text>
-                            </Card.Content>
-                        </Card>
-                    </Col>
-                    <Col span={3}>
-                        <Card>
-                            <Card.Content>
-                                <Text size="small" secondary>
-                                    <b>{this.props.t("projects.skill")}</b>
-                                    <ul>
-                                        {project.skills.map((skill) => {
-                                            return this._renderSkill(skill);
-                                        })}
-                                    </ul>
-                                    {this._renderGit(project.github)}
-                                </Text>
-                            </Card.Content>
-                        </Card>
-                    </Col>
-                </Row>
-                <Divider skin="light" />
+                <Accordion
+                    items={[
+                        {
+                            title: project.title,
+                            expandLabel: "En savoir plus",
+                            collapseLabel: "Cacher",
+                            icon: <Icons.Code />,
+                            children: (
+                                <Row>
+                                    <Col span={9}>
+                                        <Card>
+                                            <Card.Content>
+                                                <Text size="small" secondary>
+                                                    <b>{this.props.t("projects.year")}</b>{" "}
+                                                    {project.year}
+                                                    <br />
+                                                    <b>{this.props.t("projects.pedagogy")}</b>{" "}
+                                                    {project.pedagogy}
+                                                    <br />
+                                                    <br />
+                                                    <b>{this.props.t("projects.goal")}</b>{" "}
+                                                    {project.goal}
+                                                    <br />
+                                                    <br />
+                                                    {this._renderImage(project.img)}
+                                                </Text>
+                                            </Card.Content>
+                                        </Card>
+                                    </Col>
+                                    <Col span={3}>
+                                        <Card>
+                                            <Card.Content>
+                                                <Text size="small" secondary>
+                                                    <b>{this.props.t("projects.skill")}</b>
+                                                    <ul>
+                                                        {project.skills.map((skill) => {
+                                                            return this._renderSkill(skill);
+                                                        })}
+                                                    </ul>
+                                                    {this._renderGit(project.github)}
+                                                </Text>
+                                            </Card.Content>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            )
+                        }
+                    ]}
+                />
                 <br />
             </div>
         );
@@ -196,16 +205,12 @@ class Projects extends React.Component<AppProps, SampleState> {
             <Page>
                 {this._renderHeader()}
                 <Page.Content>
+                    <Text size="small" secondary>
+                        {this.props.t("projects.info")}
+                    </Text>
+                    <br />
+                    <br />
                     <Container>
-                        <Cell>
-                            <Notification theme="standard" show>
-                                <Notification.TextLabel>
-                                    {this.props.t("projects.notification")}
-                                </Notification.TextLabel>
-                                <Notification.CloseButton />
-                            </Notification>
-                        </Cell>
-                        <br />
                         {this.state.projects.map((project) => {
                             return this._renderProject(project);
                         })}
