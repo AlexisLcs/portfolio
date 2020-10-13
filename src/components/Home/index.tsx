@@ -8,7 +8,18 @@
 
 import React from "react";
 import {withTranslation, WithTranslation} from "react-i18next";
-import {Page, Card, Container, Text, Col, Row, Image, Cell, Notification} from "wix-style-react";
+import {
+    Page,
+    Card,
+    Container,
+    Text,
+    Col,
+    Row,
+    Image,
+    Cell,
+    Notification,
+    HorizontalTimeline
+} from "wix-style-react";
 
 export type AppProps = WithTranslation;
 
@@ -55,7 +66,36 @@ class Home extends React.Component<AppProps, SampleState> {
                                             <br />
                                             <br />
                                             <h2>{this.props.t("home.course")}</h2>
+                                            <br />
+                                            <HorizontalTimeline
+                                                items={[
+                                                    {
+                                                        label: "CPGE (2016-2018)",
+                                                        skin: "dark",
+                                                        icon: <HorizontalTimeline.CompleteIcon />
+                                                    },
+                                                    {
+                                                        label: "Polytech (2018-2019)",
+                                                        skin: "dark",
+                                                        icon: <HorizontalTimeline.CompleteIcon />
+                                                    },
+                                                    {
+                                                        label: "Polytech (2019-2020)",
+                                                        icon: <HorizontalTimeline.CompleteIcon />
+                                                    },
+                                                    {
+                                                        label: "Polytech et UdeS* (2020-2021)",
+                                                        icon: <HorizontalTimeline.ActiveIcon />
+                                                    }
+                                                ]}
+                                            />
+                                            <br />
                                             {this.props.t("home.presentation")}
+                                        </Text>
+                                        <br />
+                                        <br />
+                                        <Text size="tiny" secondary>
+                                            {this.props.t("home.star")}
                                         </Text>
                                     </Card.Content>
                                 </Card>

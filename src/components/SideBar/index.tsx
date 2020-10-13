@@ -16,8 +16,9 @@ import {
     Box,
     Avatar,
     Text,
-    Notification,
-    Cell
+    Cell,
+    Tooltip,
+    Badge
 } from "wix-style-react";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import "assets/styles/sidebar.scss";
@@ -61,21 +62,6 @@ class SideBar extends React.Component<AppProps, SideBarState> {
         }
     };
 
-    /**
-     * Contenu du pieds de la barre de navigation contenant le copyright.
-     */
-    footer = () => {
-        return (
-            <div className="footer">
-                <Box direction="vertical" align="center" marginLeft={4}>
-                    <Text size="tiny" textAlign="center" secondary>
-                        {this.props.t("sidebar.copyright")}
-                    </Text>
-                </Box>
-            </div>
-        );
-    };
-
     render() {
         return (
             <Sidebar selectedKey="Accueil" skin="light">
@@ -117,13 +103,23 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                             <br />
                         </div>
                         <Cell>
-                            <span className="into-notif" title="Adresse de contact">
-                                <Notification theme="success" show>
-                                    <Notification.TextLabel>
-                                        {this.props.t("sidebar.email")}
-                                    </Notification.TextLabel>
-                                </Notification>
+                            <span className="center">
+                                <Box direction="vertical" align="center">
+                                    <Badge
+                                        size="medium"
+                                        prefixIcon={<Icons.Email />}
+                                        skin="general"
+                                    >
+                                        <Tooltip
+                                            appendTo="window"
+                                            content="Vous pouvez utiliser cette adresse email pour me contacter."
+                                        >
+                                            {this.props.t("sidebar.email")}
+                                        </Tooltip>
+                                    </Badge>
+                                </Box>
                             </span>
+                            <br />
                         </Cell>
                         <SidebarDivider fullWidth />
                     </Box>
@@ -165,7 +161,14 @@ class SideBar extends React.Component<AppProps, SideBarState> {
                     </SidebarSectionItem>
                 </Sidebar.Item>
 
-                {this.footer()}
+                <Sidebar.PersistentFooter>
+                    <Box direction="vertical" align="center" marginRight={2}>
+                        <Text size="tiny" secondary>
+                            {this.props.t("sidebar.copyright")}
+                        </Text>
+                    </Box>
+                </Sidebar.PersistentFooter>
+
                 {this.state.redirect === true && this.redirect()}
             </Sidebar>
         );

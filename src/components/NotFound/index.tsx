@@ -41,9 +41,8 @@ class NotFound extends React.Component<AppProps, SampleState> {
                         <Card>
                             <Card.Content>
                                 <Text size="small" secondary>
-                                    <h2>La page souhaitée est introuvable.</h2> <br />
-                                    Vous êtes perdus ? Ne soyez pas triste, ici il y a des cookies !
-                                    Détentez-vous et réessayez plus tard...
+                                    <h2>{this.props.t("notfound.notfound")}</h2> <br />
+                                    {this.props.t("notfound.dntworry")}
                                 </Text>
                                 <br />
                                 <br />
@@ -54,8 +53,11 @@ class NotFound extends React.Component<AppProps, SampleState> {
                                     />
                                     <br />
                                     <Text size="tiny" secondary>
-                                        Illustration de{" "}
-                                        <a href="https://giphy.com/pusheen">Pusheen sur giphy</a>.
+                                        {this.props.t("notfound.mention")}{" "}
+                                        <a href="https://giphy.com/pusheen">
+                                            {this.props.t("notfound.author")}
+                                        </a>
+                                        .
                                     </Text>
                                 </div>
                             </Card.Content>
